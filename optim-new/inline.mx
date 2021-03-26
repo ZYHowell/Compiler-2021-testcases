@@ -1,0 +1,51 @@
+/*
+Test Package: Optim
+Author: 18' Zonghan YANG
+Time: 2021-03-25
+Input:
+=== input ===
+
+=== end ===
+Output:
+=== output ===
+
+=== end ===
+ExitCode: 0
+InstLimit: 999999
+*/
+
+
+int rng_seed = 19260817;
+
+int unsigned_shl(int x, int k) {
+	return x << k;
+}
+
+int unsigned_shr(int x, int k) { // k should be (0, 31)
+	int INT_MIN = 1 << 31;
+	if (x >= 0) return x >> k;
+	else return (1 << (31 - k)) | ((x ^ INT_MIN) >> k);
+}
+
+int rng() {
+	int rng_mask = 1073741823;
+	int x = rng_seed;
+	x = x ^ unsigned_shl(x, 13);
+	x = x ^ unsigned_shr(x, 17);
+	x = x ^ unsigned_shl(x, 5);
+	rng_seed = x;
+	return x & rng_mask;
+}
+
+int gcd(int x, int y) {
+	if (y > 0) return gcd(y, x % y);
+	else return x;
+}
+
+int main() {
+	int sum = 0;
+	while ((rng() & 255) != (rng() & 255)) {
+		sum = sum ^ gcd(rng() + 1, rng() + 1);
+	}
+	return sum ^ 5647;
+}
