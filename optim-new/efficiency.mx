@@ -144,7 +144,11 @@ class taskStress {
 }; 
 
 class taskInline {
-    int rng_seed = 19260817;
+    int rng_seed;
+    taskInline () {
+        rng_seed = 19260817;
+    }
+
     int unsigned_shl(int x, int k) {
         return x << k;
     }
