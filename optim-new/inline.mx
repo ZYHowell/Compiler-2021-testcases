@@ -1,7 +1,7 @@
 /*
 Test Package: Optim
 Author: 18' Zonghan YANG
-Time: 2021-03-25
+Time: 2021-04-07
 Input:
 === input ===
 
@@ -11,7 +11,7 @@ Output:
 
 === end ===
 ExitCode: 0
-InstLimit: 100000
+InstLimit: 99999
 */
 
 int unsigned_shl(int x, int k) {
@@ -36,13 +36,13 @@ int rng(int rng_seed) {
 
 int test(int q, int w, int e, int r, int t, int y, int u, int i, int o, int p) { // long parameter list test
     if (q == w) {
-		if (e != r || r != t || t != y) {
+		if (w != e || e != r) {
 			return test(w, e, r, t, y, u, i, o, p, q) + 1;
 		} else {
 			return test(w, e, r, t, y - 1, u - 2, i, o, p, q) + 2;
 		}
 	} else {
-		return q + w;
+		return q + w + q;
 	}
 }
 
@@ -60,9 +60,9 @@ int main() {
 			int z = rng(y);
 			int zz = rng(z);
 			rng_seed = zz;
-            sum = sum ^ test(w >> 15, w & 32767, x >> 15, x & 32767, y >> 15, y & 32767, z >> 15, z & 32767, zz >> 15, zz & 32767);
+            sum = sum ^ test(w & 3, w >> 28, x & 1, x >> 29, y >> 25, y & 31, z >> 15, z & 32767, zz >> 15, zz & 32767);
         }
 		else break;
     }
-    return sum;
+    return sum - 19;
 }
