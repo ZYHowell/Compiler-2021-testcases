@@ -11,10 +11,8 @@ Output:
 
 === end ===
 ExitCode: 0
-InstLimit: 999999
+InstLimit: 500000
 */
-
-
 
 int unsigned_shl(int x, int k) {
     return x << k;

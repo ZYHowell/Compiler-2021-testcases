@@ -80,7 +80,7 @@ int wP() {
                 break;
             }
         }
-		if (i + isp > 8) {
+		if (i > 0 && (i + isp) % 9 == 0) {
 			break;
 		}
         N = N + isp;
