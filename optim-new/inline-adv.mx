@@ -11,22 +11,8 @@ Output:
 
 === end ===
 ExitCode: 0
-InstLimit: 9999
+InstLimit: 99999
 */
-
-int n, m, q;
-void f() {n++; n = n * 1; n = n / 1; n = n ^ 0; n = n + 1 / 2;}
-void g() {n++; f(); f(); f(); f(); f(); f(); f(); f(); f(); n++;}
-void h() {n = n * 1; g(); g(); g(); g(); g(); g(); g(); n = n + 0;}
-void k() {n = n / 1; m++; q++; h(); h(); h(); h(); h(); h(); h(); h(); n = n - 0; m++; q++;}
-
-int work(int w) {
-    n++; m++; q++;
-    k();
-    if (w > 0) return work(w - 1);
-    else return 114514;
-}
-
 
 int w = 0;
 
@@ -67,6 +53,69 @@ int bblock() { // may be time-consuming
     return bblock();
 }
 
+int add1(int x) {
+	return x + 1;
+}
+
+int add2(int x) {
+    return add1(add1(x));
+}
+int add4(int x) {
+    return add2(add2(x));
+}
+int add8(int x) {
+    return add4(add4(x));
+}
+int add16(int x) {
+    return add8(add8(x));
+}
+int add32(int x) {
+    return add16(add16(x));
+}
+int add64(int x) {
+    return add32(add32(x));
+}
+int add128(int x) {
+    return add64(add64(x));
+}
+int add256(int x) {
+    return add128(add128(x));
+}
+int add512(int x) {
+    return add256(add256(x));
+}
+int add1024(int x) {
+    return add512(add512(x));
+}
+int add2048(int x) {
+    return add1024(add1024(x));
+}
+int add4096(int x) {
+    return add2048(add2048(x));
+}
+int add8192(int x) {
+    return add4096(add4096(x));
+}
+int add16384(int x) {
+    return add8192(add8192(x));
+}
+int add32768(int x) {
+    return add16384(add16384(x));
+}
+int add65536(int x) {
+    return add32768(add32768(x));
+}
+int add131072(int x) {
+    return add65536(add65536(x));
+}
+int add262144(int x) {
+    return add131072(add131072(x));
+}
+int add524288(int x) { // Good luck
+    return add262144(add262144(x));
+}
+
+
 int N = 1;
 int wP() {
     int i, j, ii, isp;
@@ -87,22 +136,16 @@ int wP() {
         i = i + isp;
     }
     // N = 4
-    if ((N + wpppp()) % 2 == 0) return 0;
+    if ((N + wpppp()) % 2 == 0) return add524288(N) - 524288 - 4;
     block(); block();
     block(); block();
     return bblock();
 }
 
-void sanity_check() {
-    wP();
+int sanity_check() {
+    return wP() + 1;
 }
 
 int main() {
-    n = 0;
-    m = 0;
-    q = 0;
-    int ret = work(32);
-    
-    sanity_check();
-    return ret + n + m + q - 4001;
+    return sanity_check() - 3;
 }
