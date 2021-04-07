@@ -14,7 +14,7 @@ ExitCode: 0
 InstLimit: 999999
 */
 
-
+/*
 int rng_seed = 19260817;
 
 int unsigned_shl(int x, int k) {
@@ -36,6 +36,31 @@ int rng() {
     rng_seed = x;
     return x & rng_mask;
 }
+*/
+
+int mulmod(int a, int b, int mod) {
+    int ret = 0;
+    a = a % mod;
+    while (b != 0) {
+        if ((b & 1) != 0) ret = (ret + a) % mod;
+        b = b >> 1;
+        a = a << 1;
+        a = a % mod;
+    }
+    return ret;
+} 
+int power(int a, int b, int mod) {
+    int t = 1;
+    while (b != 0) {
+        if ((b & 1) != 0) {
+            t= mulmod(t, a, mod);
+        }
+        b = b >> 1;
+        a = mulmod(a, a, mod);
+    }
+    return t;
+} 
+
 
 int gcd(int x, int y) {
     if (y > 0) return gcd(y, x % y);
@@ -43,9 +68,10 @@ int gcd(int x, int y) {
 }
 
 int main() {
-    int sum = 0;
-    while ((rng() & 255) != (rng() & 255)) {
-        sum = sum ^ gcd(rng() + 1, rng() + 1);
+    int sum = 0, i = 0, j = 0;
+    for (i = 1; i < 114; i++) {
+        j = j + i;
+        sum = sum ^ power(gcd(i, j), i + j + 514, 998244353);
     }
-    return sum ^ 5647;
+    return sum ^ 1060409693;
 }
