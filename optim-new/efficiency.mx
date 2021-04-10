@@ -141,6 +141,7 @@ class taskStress {
     }
     int main() {
         printlnInt(ret);
+		return 0;
     }
 }; 
 
