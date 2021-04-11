@@ -25,7 +25,9 @@ Output:
 1338
 === end ===
 ExitCode: 0
-InstLimit: 2500000
+RunTimeLimit: 2500000
+OutputLengthLimit: 10000
+CompileTimeLimit: 30
 */
 
 // NTT, source: https://blog.csdn.net/wu_tongtong/article/details/77620709
